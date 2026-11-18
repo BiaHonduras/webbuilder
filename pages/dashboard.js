@@ -11,6 +11,10 @@ export default function Dashboard() {
   }, [])
 
   async function loadProjects() {
+    if (!supabase) {
+      setLoading(false)
+      return
+    }
     const { data, error } = await supabase
       .from('projects')
       .select('*')
@@ -61,7 +65,7 @@ export default function Dashboard() {
         <div className="max-w-6xl mx-auto px-6 py-12">
           {!loading && projects.length === 0 && (
             <div className="text-center py-20">
-              <p className="text-gray-500 text-lg mb-4">No tienes proyectos aún</p>
+              <p className="text-gray-500 text-lg mb-4">{supabase ? 'No tienes proyectos aún' : 'El guardado de proyectos requiere configurar Supabase.'}</p>
               <a href="/" className="text-blue-600 font-semibold hover:underline">Crear uno nuevo →</a>
             </div>
           )}

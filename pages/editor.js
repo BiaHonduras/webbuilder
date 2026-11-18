@@ -108,7 +108,8 @@ export default function Editor() {
             </button>
             <button 
               onClick={saveProject}
-              disabled={saving}
+              disabled={saving || !supabase}
+              title={supabase ? undefined : 'Configura Supabase para guardar proyectos'}
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold disabled:opacity-50"
             >
               {saving ? 'Guardando...' : 'Guardar Proyecto'}
