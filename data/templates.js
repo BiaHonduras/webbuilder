@@ -1,151 +1,195 @@
-export const categories = [
-  { id: 'restaurante', name: 'Restaurantes', icon: '🍽️' },
-  { id: 'tienda', name: 'Tiendas', icon: '🛒' },
-  { id: 'servicios', name: 'Servicios', icon: '⚙️' },
-  { id: 'portfolio', name: 'Portafolios', icon: '💼' },
-]
-
 export const templates = [
+
+  // ══════════════════════════════════════════════════════
+  // 1. NOIR — La más elegante, minimalismo premium
+  // ══════════════════════════════════════════════════════
   {
-    id: 'rest-001',
-    name: 'Restaurante Clásico',
-    slug: 'restaurante-clasico',
-    category: 'restaurante',
-    description: 'Elegante para restaurantes y cafeterías',
-    colors: { primary: '#c0392b', secondary: '#f39c12', bg: '#fffbeb' },
+    id: 'noir-elegante',
+    name: 'Noir',
+    slug: 'noir-elegante',
+    description: 'Minimalismo oscuro. Para marcas que quieren transmitir exclusividad y sofisticación.',
+    colors: { primary: '#ffffff', secondary: '#c9a84c', bg: '#0a0a0a' },
     variables: {
-      title: 'Mi Restaurante',
-      tagline: 'Sabores auténticos desde 1990',
-      heroText: 'Una experiencia culinaria inolvidable',
-      ctaText: 'Reservar Mesa',
-      phone: '+52 555 123 4567',
-      address: 'Av. Principal #123, Ciudad',
+      brand: 'NOIR',
+      tagline: 'Elegancia sin tiempo',
+      heroTitle: 'Lo extraordinario\nempieza aquí',
+      heroSub: 'Diseñamos experiencias que trascienden lo ordinario',
+      ctaText: 'Descubrir más',
+      featuresTitle: 'Nuestro compromiso',
+      feature1Title: 'Calidad artesanal',
+      feature1Desc: 'Cada detalle es pensado con precisión y dedicación meticulosa',
+      feature2Title: 'Exclusividad',
+      feature2Desc: 'Servicios diseñados para quienes buscan lo único e irrepetible',
+      feature3Title: 'Personalización',
+      feature3Desc: 'Adaptamos cada solución a tus necesidades específicas',
+      contactTitle: 'Hablemos',
+      contactEmail: 'hola@noir.com',
+      address: 'Av. Presidente Masaryk 400, Ciudad de México',
     },
-    html: `<section class="min-h-screen bg-[var(--bg)] font-sans">
-  <header class="bg-white shadow p-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-[var(--primary)]">RESTAURANTE_NAME</h1>
-    <a href="#" class="bg-[var(--primary)] text-white px-6 py-2 rounded-full">CONTACTO</a>
-  </header>
-  <main class="text-center py-20 px-6">
-    <h2 class="text-5xl font-bold text-gray-800 mb-4">HERO_TEXT</h2>
-    <p class="text-xl text-gray-600 mb-8">TAGLINE</p>
-    <a href="#" class="bg-[var(--secondary)] text-white px-8 py-4 rounded-full text-lg font-semibold hover:opacity-90 transition">CTA_TEXT</a>
-    <div class="mt-12 text-gray-500">
-      <p>📍 ADDRESS</p>
-      <p>📞 PHONE</p>
+    html: `<div style="background:#0a0a0a;color:#fff;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh">
+  <nav style="display:flex;justify-content:space-between;align-items:center;padding:2rem 4rem;border-bottom:1px solid rgba(255,255,255,0.06)">
+    <span style="font-size:1.1rem;letter-spacing:.3em;font-weight:300;text-transform:uppercase">BRAND</span>
+    <div style="display:flex;gap:2.5rem;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;opacity:.5">
+      <span>Inicio</span><span>Servicios</span><span>Contacto</span>
     </div>
+  </nav>
+  <main style="padding:0 4rem">
+    <section style="min-height:70vh;display:flex;flex-direction:column;justify-content:center;max-width:800px">
+      <p style="color:#c9a84c;font-size:.75rem;letter-spacing:.4em;text-transform:uppercase;margin-bottom:2rem">EST. 2024</p>
+      <h1 style="font-size:clamp(3rem,8vw,6rem);font-weight:200;line-height:1.05;letter-spacing:-.02em;margin-bottom:2rem">
+        HERO_TITLE<br><span style="opacity:.3">en letras mayúsculas</span>
+      </h1>
+      <p style="font-size:1.1rem;opacity:.45;line-height:1.8;max-width:480px;margin-bottom:3rem">HERO_SUB</p>
+      <div style="display:flex;gap:1.5rem;align-items:center">
+        <a href="#" style="background:#c9a84c;color:#0a0a0a;padding:1rem 2.5rem;text-decoration:none;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600">CTA_TEXT</a>
+        <span style="opacity:.3;font-size:.8rem;letter-spacing:.1em">— Scroll</span>
+      </div>
+    </section>
+    <section style="padding:8rem 0;border-top:1px solid rgba(255,255,255,0.06)">
+      <p style="color:#c9a84c;font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;margin-bottom:4rem">FEATURES_TITLE</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4rem">
+        ${['feature1','feature2','feature3'].map(f => `
+          <div>
+            <div style="width:40px;height:1px;background:#c9a84c;margin-bottom:2rem"></div>
+            <h3 style="font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;font-weight:400">${f.toUpperCase()}_TITLE</h3>
+            <p style="opacity:.4;line-height:1.8;font-size:.9rem">${f.toUpperCase()}_DESC</p>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+    <footer style="padding:4rem 0;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;opacity:.4;font-size:.8rem">
+      <span>© 2024 BRAND</span>
+      <div style="text-align:right">
+        <p>CONTACT_EMAIL</p>
+        <p style="margin-top:.5rem">ADDRESS</p>
+      </div>
+    </footer>
   </main>
-</section>`
+</div>`
   },
+
+  // ══════════════════════════════════════════════════════
+  // 2. BLOOM — Elegante pero cálida, orgánica
+  // ══════════════════════════════════════════════════════
   {
-    id: 'tienda-001',
-    name: 'Tienda Online',
-    slug: 'tienda-online',
-    category: 'tienda',
-    description: 'Perfecta para e-commerce y tiendas',
-    colors: { primary: '#2563eb', secondary: '#16a34a', bg: '#f0f9ff' },
+    id: 'bloom-warm',
+    name: 'Bloom',
+    slug: 'bloom-elegante',
+    description: 'Elegancia orgánica. Paleta cálida con formas suaves. Ideal para spas, boutiques y marcas lifestyle.',
+    colors: { primary: '#b5651d', secondary: '#e8d5c4', bg: '#faf6f1' },
     variables: {
-      title: 'Mi Tienda',
-      tagline: 'Los mejores productos al mejor precio',
-      heroText: 'Compra ahora y recibe en casa',
-      ctaText: 'Ver Productos',
-      phone: '+52 555 987 6543',
-      address: 'Calle Comercio #456',
+      brand: 'Bloom Studio',
+      tagline: 'Bienestar & Estilo',
+      heroTitle: 'Cuida lo que te hace brillar',
+      heroSub: 'Productos naturales diseñados para realzar tu belleza interior y exterior',
+      ctaText: 'Explorar productos',
+      aboutTitle: 'Nuestra historia',
+      aboutText: 'Nacimos de la idea de que la belleza verdadera viene de lo natural. Cada producto es formulado con ingredientes cuidadosamente seleccionados, respetando tanto tu piel como el medio ambiente.',
+      servicesTitle: 'Qué ofrecemos',
+      service1: 'Skincare Natural',
+      service1Desc: 'Rutinas personalizadas con ingredientes orgánicos certificados',
+      service2: 'Aromaterapia',
+      service2Desc: 'Blend de esencias esenciales para balancear cuerpo y mente',
+      service3: 'Consultoría',
+      service3Desc: 'Asesoría personalizada para encontrar tu rutina ideal',
+      address: 'Calle Jardines #45, Col. Del Valle',
+      phone: '+52 555 234 5678',
     },
-    html: `<section class="min-h-screen bg-[var(--bg)] font-sans">
-  <header class="bg-blue-600 text-white p-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold">TIENDA_NAME</h1>
-    <nav class="hidden md:flex gap-6">
-      <a href="#" class="hover:text-blue-200">Productos</a>
-      <a href="#" class="hover:text-blue-200">Ofertas</a>
-      <a href="#" class="hover:text-blue-200">Contacto</a>
-    </nav>
-    <button class="bg-white text-blue-600 px-4 py-2 rounded-full">Carrito (0)</button>
-  </header>
-  <main class="text-center py-20 px-6">
-    <h2 class="text-5xl font-bold text-gray-800 mb-4">HERO_TEXT</h2>
-    <p class="text-xl text-gray-600 mb-8">TAGLINE</p>
-    <a href="#" class="bg-[var(--secondary)] text-white px-8 py-4 rounded-full text-lg font-semibold hover:opacity-90 transition">CTA_TEXT</a>
-    <div class="mt-12 grid grid-cols-3 gap-6 max-w-4xl mx-auto">
-      ${[1,2,3].map(i => `<div class="bg-white rounded-xl shadow p-6"><div class="h-32 bg-gray-200 rounded-lg mb-4"></div><h3 class="font-semibold">Producto ${i}</h3><p class="text-blue-600 font-bold">$${i * 299}</p></div>`).join('')}
+    html: `<div style="background:#faf6f1;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;color:#3a2a1a">
+  <nav style="display:flex;justify-content:space-between;align-items:center;padding:2rem 4rem">
+    <span style="font-size:1.3rem;font-weight:300;letter-spacing:.1em">BRAND</span>
+    <div style="display:flex;gap:2rem;font-size:.85rem;opacity:.6">
+      <span>Inicio</span><span>Nosotros</span><span>Servicios</span>
     </div>
+  </nav>
+  <main style="padding:0 4rem">
+    <section style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;min-height:70vh;padding:4rem 0">
+      <div>
+        <p style="color:#b5651d;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:1.5rem">TAGLINE</p>
+        <h1 style="font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.15;margin-bottom:1.5rem">HERO_TITLE</h1>
+        <p style="opacity:.55;line-height:1.9;margin-bottom:2.5rem;font-size:.95rem">HERO_SUB</p>
+        <a href="#" style="background:#b5651d;color:#fff;padding:1rem 2.5rem;text-decoration:none;font-size:.8rem;letter-spacing:.15em;display:inline-block;border-radius:50px">CTA_TEXT</a>
+      </div>
+      <div style="background:#e8d5c4;border-radius:200px 200px 20px 20px;height:500px;display:flex;align-items:end;justify-content:center;padding-bottom:2rem;font-size:.8rem;opacity:.5">
+        🌸 Tu imagen aquí
+      </div>
+    </section>
+    <section style="padding:6rem 0;text-align:center">
+      <h2 style="font-size:2rem;font-weight:300;margin-bottom:1rem">ABOUT_TITLE</h2>
+      <p style="max-width:500px;margin:0 auto;opacity:.55;line-height:1.9;font-size:.95rem">ABOUT_TEXT</p>
+    </section>
+    <section style="padding:4rem 0;border-top:1px solid rgba(181,101,29,0.15)">
+      <h3 style="text-align:center;font-weight:300;margin-bottom:4rem;font-size:1.2rem;letter-spacing:.1em;text-transform:uppercase">SERVICES_TITLE</h3>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3rem">
+        ${['service1','service2','service3'].map(s => `
+          <div style="text-align:center;padding:2rem">
+            <div style="width:60px;height:60px;border-radius:50%;background:#e8d5c4;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem">🌿</div>
+            <h4 style="font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem;font-weight:500">${s.toUpperCase()}_TITLE</h4>
+            <p style="opacity:.5;font-size:.85rem;line-height:1.7">${s.toUpperCase()}_DESC</p>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+    <footer style="padding:4rem;text-align:center;border-top:1px solid rgba(181,101,29,0.15);font-size:.85rem;opacity:.5">
+      <p>DIRECCION</p>
+      <p style="margin-top:.5rem">TELEFONO</p>
+    </footer>
   </main>
-</section>`
+</div>`
   },
+
+  // ══════════════════════════════════════════════════════
+  // 3. PRISM — Creativo, colorido, vibrante
+  // ══════════════════════════════════════════════════════
   {
-    id: 'servicios-001',
-    name: 'Servicios Profesionales',
-    slug: 'servicios-profesionales',
-    category: 'servicios',
-    description: 'Para freelancers y profesionales',
-    colors: { primary: '#7c3aed', secondary: '#0ea5e9', bg: '#faf5ff' },
+    id: 'prism-creativo',
+    name: 'Prism',
+    slug: 'prism-creativo',
+    description: 'Explosión de color. Diseño dinámico y energético para creativos, agencias y marcas jóvenes.',
+    colors: { primary: '#6366f1', secondary: '#ec4899', bg: '#0f0f1a' },
     variables: {
-      title: 'Tu Servicio',
-      tagline: 'Soluciones profesionales a tu medida',
-      heroText: 'Llevamos tu proyecto al siguiente nivel',
-      ctaText: 'Solicitar Cotización',
-      phone: '+52 555 111 2222',
-      address: 'Oficina Central #789',
+      brand: 'PRISM',
+      tagline: 'Creatividad sin límites',
+      heroTitle: 'Creamos cosas increíbles',
+      heroSub: 'Somos un estudio creativo especializado en diseño digital, branding y desarrollo web para marcas audaces.',
+      ctaText: 'Ver nuestro trabajo',
+      stats: ['150+', 'Proyectos', '45+', 'Clientes', '8+', 'Años'],
+      workTitle: 'Trabajos recientes',
+      work1: 'Rediseño marca Café Aurora',
+      work2: 'App fintech NeoBank',
+      work3: 'E-commerce Moda Urbana',
+      work4: 'Identidad visual StartupX',
+      contactTitle: '¿Tienes un proyecto?',
+      contactText: 'Nos encantaría escucharte. Escríbenos y hagamos algo genial juntos.',
+      email: 'hola@prism.studio',
     },
-    html: `<section class="min-h-screen bg-[var(--bg)] font-sans">
-  <header class="bg-white shadow p-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-purple-600">SERVICIO_NAME</h1>
-    <a href="#" class="bg-purple-600 text-white px-6 py-2 rounded-full">COTIZAR</a>
-  </header>
-  <main class="py-20 px-6 max-w-5xl mx-auto">
-    <div class="text-center mb-16">
-      <h2 class="text-5xl font-bold text-gray-800 mb-4">HERO_TEXT</h2>
-      <p class="text-xl text-gray-600">TAGLINE</p>
-      <a href="#" class="inline-block mt-8 bg-purple-600 text-white px-8 py-4 rounded-full text-lg hover:bg-purple-700 transition">CTA_TEXT</a>
+    html: `<div style="background:#0f0f1a;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;color:#fff">
+  <nav style="display:flex;justify-content:space-between;align-items:center;padding:2rem 4rem">
+    <span style="font-size:1.5rem;font-weight:800;letter-spacing:-.05em">BRAND<span style="color:#ec4899">.</span></span>
+    <div style="display:flex;gap:2rem;font-size:.85rem;opacity:.6">
+      <span>Work</span><span>About</span><span>Contact</span>
     </div>
-    <div class="grid md:grid-cols-3 gap-8">
-      ${['Consultoría','Desarrollo','Soporte'].map(s => `
-        <div class="bg-white rounded-2xl p-8 shadow-lg text-center">
-          <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">⭐</div>
-          <h3 class="text-xl font-bold mb-2">${s}</h3>
-          <p class="text-gray-600">Servicio profesional de alta calidad.</p>
+  </nav>
+  <main style="padding:0 4rem">
+    <section style="padding:6rem 0">
+      <p style="color:#6366f1;font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:1.5rem">TAGLINE</p>
+      <h1 style="font-size:clamp(3rem,7vw,5.5rem);font-weight:800;line-height:1;margin-bottom:1.5rem;letter-spacing:-.03em">
+        HERO_TITLE<br>
+        <span style="background:linear-gradient(90deg,#6366f1,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent">con estilo</span>
+      </h1>
+      <p style="opacity:.45;max-width:500px;line-height:1.8;margin-bottom:2.5rem;font-size:.95rem">HERO_SUB</p>
+      <a href="#" style="background:linear-gradient(90deg,#6366f1,#ec4899);color:#fff;padding:1rem 2.5rem;text-decoration:none;font-size:.8rem;font-weight:600;letter-spacing:.1em;border-radius:50px;display:inline-block">CTA_TEXT</a>
+    </section>
+    <section style="padding:4rem 0;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)">
+      ${['150+', 'Proyectos', '45+', 'Clientes', '8+', 'Años', '∞', 'Ideas'].map((v,i) => `
+        <div style="text-align:center;padding:2rem 0">
+          <p style="font-size:2.5rem;font-weight:800;background:linear-gradient(135deg,#6366f1,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${v}</p>
+          <p style="opacity:.4;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;margin-top:.5rem">${['PROYECTOS','CLIENTES','AÑOS','IDEAS'][Math.floor(i/2)]}</p>
         </div>
       `).join('')}
-    </div>
-    <div class="mt-16 text-center text-gray-500">
-      <p>📍 ADDRESS</p>
-      <p>📞 PHONE</p>
-    </div>
-  </main>
-</section>`
-  },
-  {
-    id: 'portfolio-001',
-    name: 'Portafolio Creativo',
-    slug: 'portafolio-creativo',
-    category: 'portfolio',
-    description: 'Ideal para diseñadores y creativos',
-    colors: { primary: '#0f172a', secondary: '#f59e0b', bg: '#ffffff' },
-    variables: {
-      title: 'Mi Portafolio',
-      tagline: 'Diseñador & Desarrollador',
-      heroText: 'Creo experiencias digitales únicas',
-      ctaText: 'Ver Proyectos',
-      phone: '+52 555 333 4444',
-      address: 'Remoto / Global',
-    },
-    html: `<section class="min-h-screen bg-white font-sans">
-  <header class="p-6 flex justify-between items-center border-b">
-    <h1 class="text-2xl font-black text-slate-900">PORTFOLIO_NAME</h1>
-    <nav class="flex gap-8 text-slate-600">
-      <a href="#" class="hover:text-slate-900">Trabajos</a>
-      <a href="#" class="hover:text-slate-900">Sobre mí</a>
-      <a href="#" class="hover:text-slate-900">Contacto</a>
-    </nav>
-  </header>
-  <main class="max-w-6xl mx-auto px-6 py-20">
-    <p class="text-amber-500 font-semibold mb-2">TAGLINE</p>
-    <h2 class="text-6xl font-black text-slate-900 mb-8 leading-tight">HERO_TEXT</h2>
-    <a href="#" class="inline-block bg-slate-900 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-slate-800 transition">CTA_TEXT</a>
-    <div class="mt-16 grid md:grid-cols-2 gap-8">
-      ${[1,2,3,4].map(i => `<div class="aspect-video bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center text-slate-400 text-xl">Proyecto ${i}</div>`).join('')}
-    </div>
-  </main>
-</section>`
-  },
-]
+    </section>
+    <section style="padding:6rem 0">
+      <h2 style="font-size:1.5rem;font-weight:600;margin-bottom:3rem;letter-spacing:.05em">WORK_TITLE</h2>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem">
+        ${['work1','work2','work3','work4'].map((w, i) => `
+          <div style="background:linear-gradient(${i%2===0?135:225}deg,rgba(99,102,241,.2),rgba(236,72,153,.2));border-radius:16px;padding:3rem;display:flex;align-items:center;justify-content:center;min-height:200
