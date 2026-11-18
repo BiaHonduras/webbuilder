@@ -32,31 +32,51 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>WebNexo | Plantillas web para tu negocio</title>
+        <title>WebNexo | El diseño perfecto para tu emprendimiento</title>
         <meta name="description" content="Explora plantillas web para emprendimientos en Honduras, consulta una vista previa y cotiza por WhatsApp." />
       </Head>
-      <main className="min-h-screen bg-[#f9f8fd] text-slate-950">
-        <header className="border-b border-violet-100 bg-white">
+      <main className="min-h-screen bg-[#f2f5fa] text-slate-950">
+        <header className="border-b border-white/10 bg-[#080e1e] text-white">
           <nav className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-4 sm:px-8">
-            <Link href="/" className="text-xl font-black tracking-tight text-violet-800">WebNexo</Link>
+            <Link href="/" className="inline-flex items-center gap-2.5 text-xl font-black tracking-tight"><span className="webnexo-mark" aria-hidden="true" />WebNexo</Link>
             <div className="flex items-center gap-4 text-sm font-semibold">
-              <Link href="/comprar/" className="text-slate-700 hover:text-violet-800">Mi cuenta</Link>
-              <a href={quoteUrl()} target="_blank" rel="noopener noreferrer" className="rounded-lg bg-violet-700 px-4 py-2 text-white hover:bg-violet-800">Cotizar</a>
+              <Link href="/comprar/" className="text-slate-200 hover:text-cyan-300">Mi cuenta</Link>
+              <a href={quoteUrl()} target="_blank" rel="noopener noreferrer" className="rounded-lg bg-cyan-300 px-4 py-2 text-slate-950 hover:bg-cyan-200">Cotizar</a>
             </div>
           </nav>
         </header>
 
-        <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8">
-          <section className="rounded-3xl bg-gradient-to-br from-[#e9deff] via-[#f2e8ff] to-[#d9f3f6] px-5 py-12 text-center sm:px-12 sm:py-16">
-            <h1 className="text-4xl font-black tracking-tight text-indigo-950 sm:text-6xl">Encuentra el diseño para tu web</h1>
-            <p className="mx-auto mt-4 max-w-xl text-base text-slate-700 sm:text-lg">Explora la galería, prueba una demo y cotiza la plantilla que elijas por WhatsApp.</p>
-            <div className="mx-auto mt-7 flex max-w-xl items-center gap-3 rounded-xl border border-violet-200 bg-white px-4 shadow-sm focus-within:ring-2 focus-within:ring-violet-600">
-              <label htmlFor="template-search" className="sr-only">Buscar plantillas</label>
-              <span aria-hidden="true" className="text-2xl text-violet-700">⌕</span>
-              <input id="template-search" type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Busca un estilo, negocio o categoría" className="w-full bg-transparent py-3 text-slate-900 outline-none placeholder:text-slate-500" />
+        <section className="webnexo-hero" aria-labelledby="webnexo-lema">
+          <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[1.12fr_0.88fr] lg:py-24">
+            <div>
+              <h1 id="webnexo-lema" className="max-w-3xl text-4xl font-black leading-[1.04] tracking-tight text-white sm:text-6xl xl:text-7xl">
+                El diseño perfecto para tu <span className="text-cyan-300">emprendimiento</span>
+              </h1>
+              <p className="mt-5 max-w-lg text-base leading-relaxed text-slate-300 sm:text-lg">
+                Explora plantillas web por categoría y encuentra una para tu negocio.
+              </p>
+              <div className="mt-8 flex max-w-lg items-center gap-3 rounded-xl border border-cyan-200/30 bg-[#101b30] px-4 focus-within:ring-2 focus-within:ring-cyan-300">
+                <label htmlFor="template-search" className="sr-only">Buscar plantillas</label>
+                <span aria-hidden="true" className="webnexo-search-icon" />
+                <input id="template-search" type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Busca un estilo, negocio o categoría" className="min-w-0 w-full bg-transparent py-3.5 text-white outline-none placeholder:text-slate-300" />
+              </div>
+              <a href="#plantillas" className="mt-5 inline-flex rounded-lg bg-cyan-300 px-4 py-2.5 text-sm font-bold text-slate-950 hover:bg-cyan-200">Explorar plantillas <span aria-hidden="true" className="ml-2">↓</span></a>
             </div>
-          </section>
+            <div className="webnexo-showcase hidden lg:block" aria-hidden="true">
+              <div className="webnexo-window">
+                <div className="webnexo-window-bar"><i /><i /><i /><span /></div>
+                <div className="webnexo-window-body">
+                  {['trazo-estudio', 'brasa-urbana', 'ruta-montana'].map(id => {
+                    const item = catalog.find(template => template.id === id)
+                    return item && <div key={id} className="webnexo-window-tile" style={{ backgroundImage: `linear-gradient(0deg, #071021, transparent 76%), url("${item.thumbnail}")` }}><span>{item.name}</span></div>
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <section id="plantillas" className="py-9" aria-labelledby="gallery-title">
             <div className="flex flex-wrap items-end justify-between gap-2">
               <h2 id="gallery-title" className="text-2xl font-bold tracking-tight">Galería de plantillas</h2>

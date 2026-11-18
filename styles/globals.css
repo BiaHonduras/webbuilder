@@ -5,3 +5,134 @@
 body {
   background-color: #f8fafc;
 }
+
+.webnexo-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 85% 32%, #173975 0%, transparent 54%),
+    radial-gradient(ellipse at 63% 96%, #271956 0%, transparent 55%),
+    #080e1e;
+}
+
+.webnexo-hero::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: '';
+  background-image:
+    linear-gradient(#88c6ff16 1px, transparent 1px),
+    linear-gradient(90deg, #88c6ff16 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: linear-gradient(115deg, transparent 10%, black 78%);
+  pointer-events: none;
+}
+
+.webnexo-mark {
+  position: relative;
+  width: 1.65rem;
+  height: 1.65rem;
+  flex-shrink: 0;
+  border: 2px solid #67e8f9;
+  border-radius: 0.4rem;
+  transform: rotate(-12deg);
+}
+
+.webnexo-mark::after {
+  position: absolute;
+  inset: 4px;
+  content: '';
+  border: 2px solid #a78bfa;
+  border-radius: 2px;
+}
+
+.webnexo-search-icon {
+  position: relative;
+  display: inline-block;
+  width: 0.95rem;
+  height: 0.95rem;
+  flex-shrink: 0;
+  border: 2px solid #67e8f9;
+  border-radius: 50%;
+}
+
+.webnexo-search-icon::after {
+  position: absolute;
+  top: 0.62rem;
+  left: 0.66rem;
+  width: 0.4rem;
+  height: 2px;
+  content: '';
+  background-color: #67e8f9;
+  transform: rotate(45deg);
+}
+
+.webnexo-showcase {
+  padding: 0.9rem;
+  border: 1px solid #6fb5ff44;
+  border-radius: 1.75rem;
+  background-color: #6fb5ff12;
+  box-shadow: 0 1.75rem 5rem #02071199;
+  transform: rotate(-3deg);
+}
+
+.webnexo-window {
+  overflow: hidden;
+  border: 1px solid #88c6ff44;
+  border-radius: 1.1rem;
+  background-color: #0a1427;
+}
+
+.webnexo-window-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.85rem 0.9rem;
+  border-bottom: 1px solid #6fb5ff33;
+}
+
+.webnexo-window-bar i {
+  width: 0.43rem;
+  height: 0.43rem;
+  border-radius: 50%;
+  background-color: #67e8f9;
+}
+
+.webnexo-window-bar i:nth-child(2) { background-color: #a78bfa; }
+.webnexo-window-bar i:nth-child(3) { background-color: #93c5fd; }
+
+.webnexo-window-bar span {
+  width: 34%;
+  height: 0.45rem;
+  margin-inline: auto;
+  border-radius: 1rem;
+  background-color: #365378;
+}
+
+.webnexo-window-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  padding: 0.75rem;
+}
+
+.webnexo-window-tile {
+  display: flex;
+  min-height: 5.8rem;
+  align-items: flex-end;
+  padding: 0.65rem 0.8rem;
+  border-radius: 0.6rem;
+  background-color: #22385d;
+  background-position: center;
+  background-size: cover;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.webnexo-window-tile:first-child {
+  grid-column: 1 / -1;
+  min-height: 12rem;
+  font-size: 1.25rem;
+}
