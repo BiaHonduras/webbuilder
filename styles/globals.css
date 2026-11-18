@@ -136,3 +136,38 @@ body {
   min-height: 12rem;
   font-size: 1.25rem;
 }
+
+.webnexo-gallery {
+  background:
+    radial-gradient(ellipse at 0% 10%, #dceeff 0%, transparent 45rem),
+    radial-gradient(ellipse at 100% 18%, #e8e3ff 0%, transparent 39rem),
+    #f2f5fa;
+}
+
+.webnexo-gallery-banner {
+  background:
+    linear-gradient(90deg, #eaf6ff 0%, #eaf6fff5 39%, #dfebff55 76%, #dde9ff2a 100%),
+    url('/gallery-images/1519389950473-47ba0277781c-1200.jpg') right 41% / 72% auto no-repeat,
+    #dbeaff;
+}
+
+.webnexo-gallery-banner::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: '';
+  background-image:
+    linear-gradient(#2163a519 1px, transparent 1px),
+    linear-gradient(90deg, #2163a519 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(90deg, black, transparent 86%);
+}
+
+@media (max-width: 640px) {
+  .webnexo-gallery-banner {
+    background:
+      linear-gradient(90deg, #eaf6ff 0%, #eaf6ffed 52%, #dbeaff77 100%),
+      url('/gallery-images/1519389950473-47ba0277781c-560.jpg') right center / auto 100% no-repeat,
+      #dbeaff;
+  }
+}

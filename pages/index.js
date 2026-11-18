@@ -76,11 +76,11 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <section id="plantillas" className="py-9" aria-labelledby="gallery-title">
-            <div className="flex flex-wrap items-end justify-between gap-2">
-              <h2 id="gallery-title" className="text-2xl font-bold tracking-tight">Galería de plantillas</h2>
-              <p className="text-sm text-slate-600" aria-live="polite">{filtered.length} {filtered.length === 1 ? 'plantilla' : 'plantillas'}</p>
+        <div className="webnexo-gallery">
+          <section id="plantillas" className="mx-auto max-w-7xl px-5 py-8 sm:px-8 sm:py-12" aria-labelledby="gallery-title">
+            <div className="webnexo-gallery-banner relative isolate flex min-h-[9rem] flex-wrap content-end items-end justify-between gap-3 overflow-hidden rounded-2xl border border-sky-200/70 px-5 py-5 sm:px-7">
+              <h2 id="gallery-title" className="text-2xl font-black tracking-tight text-slate-950 sm:text-3xl">Galería de plantillas</h2>
+              <p className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-slate-700" aria-live="polite">{filtered.length} {filtered.length === 1 ? 'plantilla' : 'plantillas'}</p>
             </div>
             <div className="my-5 flex flex-wrap gap-2" aria-label="Categorías">
               {[{ id: 'all', name: 'Todas' }, ...categories].map(({ id, name }) => (

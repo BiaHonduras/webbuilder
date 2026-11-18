@@ -103,6 +103,17 @@ const designs = [
   ["Aula Abierta","educacion","offset","Aprende haciendo","Cursos cortos para desarrollar habilidades a tu ritmo.","Cursos disponibles","Diseño|Tecnología|Negocios","e9f6f5 173b41 95e2d9",""],
   ["Semilla Aprende","educacion","grid","Crecer también se aprende","Talleres creativos para niñas, niños y familias.","Actividades","Arte|Lectura|Ciencia","fff0e4 4e3324 f8b97b",""],
   ["Método Claro","educacion","mono","Un paso a la vez","Clases personalizadas y recursos de estudio para avanzar con confianza.","Cómo te acompañamos","Tutorías|Guías|Evaluaciones","f3f1ff 242448 c6bcff",""],
+  ["Nexo Automatiza","lanzamiento","mono","Menos tareas, más tiempo","Sitio para servicios de automatización, integraciones y operaciones digitales.","Soluciones digitales","Flujos de trabajo|Integraciones|Reportes","eaf7ff 17334b 75e6ec",""],
+  ["Código Base","lanzamiento","rail","Construye tu próximo producto","Página para un equipo de desarrollo web y aplicaciones a la medida.","Servicios de desarrollo","Aplicaciones web|APIs|Mantenimiento","172139 e9f6ff 9abfff",""],
+  ["Escudo Digital","lanzamiento","cover","Protege lo que te conecta","Presentación para consultorías de seguridad digital empresarial.","Áreas de protección","Evaluaciones|Capacitación|Respuesta","1b2733 e7f5ff 9ce3c2",""],
+  ["Taller Móvil","servicios","grid","Vuelve a conectar","Sitio para reparación de teléfonos, computadoras y dispositivos de oficina.","Servicios técnicos","Diagnóstico|Reparación|Soporte","e9f0f8 203b59 8eb9ed",""],
+  ["Casa Serena","bienestar","split","Haz espacio para ti","Página para estudios de yoga y programas de movimiento consciente.","Clases y sesiones","Yoga|Movilidad|Meditación","f6efe7 473c30 edcfa0",""],
+  ["Punto Fermento","restaurante","mosaic","Pan con tiempo y cuidado","Menú visual para panaderías artesanales y pedidos por encargo.","Horneamos para ti","Masa madre|Pastelería|Encargos","f8edde 4c3023 eaa775","1501339847302-ac426a4a7cbb"],
+  ["Mercado Raíz","tienda","editorial","Lo local tiene historia","Catálogo para productores de alimentos y comercios de barrio.","Productos del mercado","Canastas|Conservas|Regalos","eef3de 30402d bbd08c","1512621776951-a57141f2eefd"],
+  ["Óptica de Autor","portfolio","offset","Una mirada propia","Portafolio creativo para estudios de fotografía comercial y audiovisual.","Trabajos seleccionados","Producto|Retratos|Video","f1ecfa 392b5b c8a8ec",""],
+  ["Bitácora Caribe","turismo","gallery","Descubre la costa a tu ritmo","Sitio para operadores de viajes, excursiones y experiencias costeras.","Explora el destino","Excursiones|Estadías|Guías","eef7fa 13424c a8e0e2","1500534623283-312aade485b7"],
+  ["Foro Impulso","eventos","poster","Aquí se encuentran las ideas","Landing para foros de emprendimiento y encuentros profesionales.","Programa del encuentro","Conferencias|Talleres|Inscripción","ecedff 28274b b8afff",""],
+  ["Campus Digital","educacion","rail","Aprende para crear","Página para academias de programación y cursos de habilidades digitales.","Programas de estudio","Programación|Diseño digital|Mentoría","e8f0ff 1d355a a1c6ff","1519389950473-47ba0277781c"],
 ]
 
 const photography = {
