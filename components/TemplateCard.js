@@ -19,7 +19,7 @@ export default function TemplateCard({ template, category, onUse, onPreview }) {
         <p className="text-sm text-stone-600">{category}</p>
         <h3 className="mt-1 text-2xl font-bold">{template.name}</h3>
         <p className="mt-2 text-sm text-stone-700">{template.description}</p>
-        {template.price && <p className="mt-4 font-bold">L {money.format(template.price)} <span className="text-sm font-normal text-stone-600">con publicaci�n inicial</span></p>}
+        {template.price && <p className="mt-4 font-bold">L {money.format(template.price)} <span className="text-sm font-normal text-stone-600">con publicación inicial</span></p>}
         <div className="mt-5 flex flex-wrap gap-2">
           <button onClick={() => onPreview(template)} className="rounded-full border border-stone-300 px-4 py-2 font-semibold">Ver demo</button>
           <button onClick={() => onUse(template)} className="rounded-full bg-emerald-900 px-4 py-2 font-semibold text-white">Personalizar</button>

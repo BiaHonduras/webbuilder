@@ -92,7 +92,7 @@ export default function Editor() {
   return (
     <>
       <Head>
-        <title>Editor - {template.name}</title>
+        <title>Editor — {template.name}</title>
       </Head>
 
       <div className="min-h-screen bg-gray-100 flex flex-col">
@@ -114,7 +114,7 @@ export default function Editor() {
             >
               {saving ? 'Guardando...' : 'Guardar Proyecto'}
             </button>
-            <a href="/" className="px-4 py-2 text-gray-500 hover:text-gray-700"> Volver</a>
+            <a href="/" className="px-4 py-2 text-gray-500 hover:text-gray-700">← Volver</a>
           </div>
         </div>
 
