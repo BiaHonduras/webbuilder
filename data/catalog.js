@@ -123,12 +123,12 @@ const gallery = designs.map(([name, category, layout, heading, description, sect
   const [bg, primary, secondary] = palette.split(' ').map(value => '#' + value)
   const [item1, item2, item3] = items.split('|')
   const photoId = image || photography[category]
-  const photoUrl = 'https://images.unsplash.com/photo-' + photoId + '?auto=format&fit=crop&w='
+  const photoPath = '/gallery-images/' + photoId
   return {
     id, slug: id, name, category, layout, description,
     colors: { bg, primary, secondary },
-    image: photoUrl + '1200&q=80',
-    thumbnail: photoUrl + '560&q=75',
+    image: photoPath + '-1200.jpg',
+    thumbnail: photoPath + '-560.jpg',
     variables: { title: name, heading, description, section, item1, item2, item3, detail1: '', detail2: '', detail3: '', action: 'Contáctanos', whatsapp: '', address: 'Honduras', hours: '' },
     format: 'catalog',
   }

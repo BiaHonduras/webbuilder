@@ -25,7 +25,7 @@ export default function Editor() {
   }, [])
 
   function updatePreview(tpl, vars, cols) {
-    setPreviewHtml(renderTemplate(tpl, vars, cols))
+    setPreviewHtml(renderTemplate(tpl, vars, cols, window.location.origin))
   }
 
   function handleVariableChange(key, value) {

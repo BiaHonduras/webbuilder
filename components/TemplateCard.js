@@ -3,9 +3,9 @@ import { pageHtml, renderTemplate, quoteUrl } from '../lib/template-preview'
 export default function TemplateCard({ template, category, onPreview }) {
   return (
     <article className="group overflow-hidden rounded-2xl border border-violet-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-      <button type="button" onClick={() => onPreview(template)} aria-label={'Ver demo de ' + template.name} className="relative block aspect-[16/10] w-full overflow-hidden text-left" style={{ backgroundColor: template.colors.bg }}>
+      <button type="button" onClick={() => onPreview(template)} aria-label={'Ver demo de ' + template.name} className="relative block aspect-[16/10] w-full overflow-hidden text-left" style={{ background: template.thumbnail ? 'linear-gradient(135deg, ' + template.colors.primary + ', ' + template.colors.secondary + ')' : template.colors.bg }}>
         {template.thumbnail ? <>
-          <img src={template.thumbnail} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-105" />
+          <img src={template.thumbnail} alt="" loading="lazy" decoding="async" onError={event => { event.currentTarget.hidden = true; event.currentTarget.style.display = 'none' }} className="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-105" />
           <div className={`absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black via-black/25 to-transparent p-5 text-white ${['editorial','mono','rail'].includes(template.layout) ? 'items-start' : 'items-center text-center'}`}>
             <span className="text-xs font-medium">{template.name}</span>
             <span className={`mt-1 max-w-[20ch] text-2xl font-bold leading-tight ${['editorial','cover','gallery'].includes(template.layout) ? 'font-serif' : ''}`}>{template.variables.heading}</span>
