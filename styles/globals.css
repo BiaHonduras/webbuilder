@@ -171,3 +171,25 @@ body {
       #dbeaff;
   }
 }
+
+.webnexo-account {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 83% 14%, #152e63 0%, transparent 60%),
+    radial-gradient(ellipse at 0% 82%, #114752 0%, transparent 53%),
+    #080e1e;
+}
+
+.webnexo-account::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: '';
+  background-image:
+    radial-gradient(circle at 1px 1px, #a5eaff6e 1px, transparent 2px),
+    repeating-linear-gradient(135deg, transparent 0 63px, #6ccdfb26 64px 65px, transparent 66px 92px);
+  background-size: 23px 23px, auto;
+  mask-image: linear-gradient(115deg, black, transparent 60%, black);
+  pointer-events: none;
+}

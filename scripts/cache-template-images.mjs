@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 
 const source = await readFile(new URL('../data/catalog.js', import.meta.url), 'utf8')
-const { catalog } = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'))
+const { publicCatalog: catalog } = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'))
 const paths = new Set(catalog.flatMap(template => [template.image, template.thumbnail]).filter(Boolean))
 const output = new URL('../public/gallery-images/', import.meta.url)
 

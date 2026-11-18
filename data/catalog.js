@@ -60,8 +60,26 @@ const sampleDetails = {
 }
 
 
+const classicPhotos = {
+  "mesa-cacao": "1551218808-94e220e084d2",
+  "mercado-local": "1441986300917-64674bd600d8",
+  "estudio-norte": "1497366811353-6870744d04b2",
+  "luz-estudio": "1500530855697-b586d89ba3ee",
+  "pulso-digital": "1519389950473-47ba0277781c",
+  "cuaderno-abierto": "1455390582262-044cdead277a",
+  "noir-elegante": "1486406146926-c627a92ad1ab",
+  "bloom-warm": "1540555700478-4be289fbecef",
+  "prism-creativo": "1511795409834-ef04bbd61622"
+}
+
+function photoPaths(photoId) {
+  const path = '/gallery-images/' + photoId
+  return { image: path + '-1200.jpg', thumbnail: path + '-560.jpg' }
+}
+
 const existingCatalog = presets.map(([id, name, category, description, source, sourceUrl, palette, heading, section, items, action]) => ({
   id, slug: id, name, category, description, source, sourceUrl,
+  ...photoPaths(classicPhotos[id]),
   colors: { primary: palette[0], secondary: palette[1], bg: palette[2] },
   variables: {
     title: name, heading, description, section,
@@ -134,15 +152,20 @@ const gallery = designs.map(([name, category, layout, heading, description, sect
   const [bg, primary, secondary] = palette.split(' ').map(value => '#' + value)
   const [item1, item2, item3] = items.split('|')
   const photoId = image || photography[category]
-  const photoPath = '/gallery-images/' + photoId
   return {
     id, slug: id, name, category, layout, description,
     colors: { bg, primary, secondary },
-    image: photoPath + '-1200.jpg',
-    thumbnail: photoPath + '-560.jpg',
+    ...photoPaths(photoId),
     variables: { title: name, heading, description, section, item1, item2, item3, detail1: '', detail2: '', detail3: '', action: 'Contáctanos', whatsapp: '', address: 'Honduras', hours: '' },
     format: 'catalog',
   }
 })
 
+const legacy = [
+  { id: 'noir-elegante', name: 'Noir', category: 'servicios', description: 'Diseño oscuro y minimalista.', colors: { bg: '#171624', primary: '#171624', secondary: '#756480' }, variables: { heading: 'Elegancia sin tiempo' } },
+  { id: 'bloom-warm', name: 'Bloom', category: 'servicios', description: 'Estilo cálido para marcas de bienestar.', colors: { bg: '#f6e4d9', primary: '#643c46', secondary: '#d7a18b' }, variables: { heading: 'Crece a tu ritmo' } },
+  { id: 'prism-creativo', name: 'Prism', category: 'portfolio', description: 'Portafolio de estilo dinámico y creativo.', colors: { bg: '#272443', primary: '#272443', secondary: '#ab62b6' }, variables: { heading: 'Diseño con personalidad' } },
+].map(template => ({ ...template, ...photoPaths(classicPhotos[template.id]) }))
+
 export const catalog = [...gallery, ...existingCatalog]
+export const publicCatalog = [...catalog, ...legacy]

@@ -1,25 +1,21 @@
 import { useRef, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import { categories, catalog } from '../data/catalog'
+import { categories, publicCatalog as catalog } from '../data/catalog'
 import TemplateCard from '../components/TemplateCard'
+import WebNexoHeader from '../components/WebNexoHeader'
 import { checkoutUrl, quoteUrl } from '../lib/checkout-links'
 
 const categoryNames = Object.fromEntries(categories.map(({ id, name }) => [id, name]))
 const normalize = value => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-const templates = [
-  ...catalog,
-  { id: 'noir-elegante', name: 'Noir', category: 'servicios', description: 'Diseño oscuro y minimalista.', colors: { bg: '#171624', primary: '#171624', secondary: '#756480' }, variables: { heading: 'Elegancia sin tiempo' } },
-  { id: 'bloom-warm', name: 'Bloom', category: 'servicios', description: 'Estilo cálido para marcas de bienestar.', colors: { bg: '#f6e4d9', primary: '#643c46', secondary: '#d7a18b' }, variables: { heading: 'Crece a tu ritmo' } },
-  { id: 'prism-creativo', name: 'Prism', category: 'portfolio', description: 'Portafolio de estilo dinámico y creativo.', colors: { bg: '#272443', primary: '#272443', secondary: '#ab62b6' }, variables: { heading: 'Diseño con personalidad' } },
-]
+
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState('all')
   const [query, setQuery] = useState('')
   const [selected, setSelected] = useState(null)
   const dialog = useRef(null)
-  const filtered = templates.filter(template =>
+  const filtered = catalog.filter(template =>
     (activeCategory === 'all' || template.category === activeCategory) &&
     normalize([template.name, categoryNames[template.category], template.description].join(' ')).includes(normalize(query.trim()))
   )
@@ -35,16 +31,8 @@ export default function Home() {
         <title>WebNexo | El diseño perfecto para tu emprendimiento</title>
         <meta name="description" content="Explora plantillas web para emprendimientos en Honduras, consulta una vista previa y cotiza por WhatsApp." />
       </Head>
+      <WebNexoHeader />
       <main className="min-h-screen bg-[#f2f5fa] text-slate-950">
-        <header className="border-b border-white/10 bg-[#080e1e] text-white">
-          <nav className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-4 sm:px-8">
-            <Link href="/" className="inline-flex items-center gap-2.5 text-xl font-black tracking-tight"><span className="webnexo-mark" aria-hidden="true" />WebNexo</Link>
-            <div className="flex items-center gap-4 text-sm font-semibold">
-              <Link href="/comprar/" className="text-slate-200 hover:text-cyan-300">Mi cuenta</Link>
-              <a href={quoteUrl()} target="_blank" rel="noopener noreferrer" className="rounded-lg bg-cyan-300 px-4 py-2 text-slate-950 hover:bg-cyan-200">Cotizar</a>
-            </div>
-          </nav>
-        </header>
 
         <section className="webnexo-hero" aria-labelledby="webnexo-lema">
           <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[1.12fr_0.88fr] lg:py-24">
@@ -77,7 +65,7 @@ export default function Home() {
         </section>
 
         <div className="webnexo-gallery">
-          <section id="plantillas" className="mx-auto max-w-7xl px-5 py-8 sm:px-8 sm:py-12" aria-labelledby="gallery-title">
+          <section id="plantillas" className="scroll-mt-20 mx-auto max-w-7xl px-5 py-8 sm:px-8 sm:py-12" aria-labelledby="gallery-title">
             <div className="webnexo-gallery-banner relative isolate flex min-h-[9rem] flex-wrap content-end items-end justify-between gap-3 overflow-hidden rounded-2xl border border-sky-200/70 px-5 py-5 sm:px-7">
               <h2 id="gallery-title" className="text-2xl font-black tracking-tight text-slate-950 sm:text-3xl">Galería de plantillas</h2>
               <p className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-slate-700" aria-live="polite">{filtered.length} {filtered.length === 1 ? 'plantilla' : 'plantillas'}</p>
