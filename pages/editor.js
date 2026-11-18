@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { supabase } from '../lib/supabase'
+import { pageHtml, renderTemplate } from '../lib/template-preview'
 
 export default function Editor() {
   const [template, setTemplate] = useState(null)
@@ -24,16 +25,7 @@ export default function Editor() {
   }, [])
 
   function updatePreview(tpl, vars, cols) {
-    let html = tpl.html
-    // Reemplazar variables de texto
-    Object.entries(vars).forEach(([key, value]) => {
-      html = html.replace(new RegExp(key.toUpperCase(), 'g'), value)
-    })
-    // Reemplazar colores CSS
-    Object.entries(cols).forEach(([key, value]) => {
-      html = html.replace(new RegExp(`var\\(--${key.toUpperCase()}\\)`, 'gi'), value)
-    })
-    setPreviewHtml(html)
+    setPreviewHtml(renderTemplate(tpl, vars, cols))
   }
 
   function handleVariableChange(key, value) {
@@ -50,48 +42,43 @@ export default function Editor() {
 
   async function saveProject() {
     setSaving(true)
-    const session = await supabase.auth.getSession()
-    
-    const projectData = {
-      template_id: template.id,
-      custom_name: variables.title || template.name,
-      custom_colors: colors,
-      custom_text: variables,
-      custom_html: previewHtml,
-      is_published: false,
-      user_id: session.data.session?.user?.id || 'anonymous',
+    try {
+      const session = await supabase.auth.getSession()
+      if (session.error) throw session.error
+      const projectData = {
+        template_id: template.id,
+        custom_name: variables.title || variables.brand || template.name,
+        custom_colors: colors,
+        custom_text: variables,
+        custom_html: previewHtml,
+        is_published: false,
+        user_id: session.data.session?.user?.id || 'anonymous',
+      }
+      const projects = supabase.from('projects')
+      const result = projectId
+        ? await projects.update(projectData).eq('id', projectId).select('id').single()
+        : await projects.insert(projectData).select('id').single()
+      if (result.error) throw result.error
+      setProjectId(result.data.id)
+      alert('Proyecto guardado')
+    } catch {
+      alert('No se pudo guardar el proyecto. Puedes exportar el HTML para conservar tus cambios.')
+    } finally {
+      setSaving(false)
     }
-
-    if (projectId) {
-      await supabase.from('projects').update(projectData).eq('id', projectId)
-    } else {
-      const { data, error } = await supabase.from('projects').insert([projectData]).select()
-      if (data) setProjectId(data[0].id)
-    }
-    setSaving(false)
-    alert('Proyecto guardado ✓')
   }
 
   function exportHTML() {
-    const fullHTML = `<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${variables.title}</title>
-  <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2/dist/tailwind.min.js"><\/script>
-</head>
-<body>
-${previewHtml}
-</body>
-</html>`
+    const title = variables.title || variables.brand || template.name
+    const fullHTML = pageHtml(title, previewHtml)
     
     const blob = new Blob([fullHTML], { type: 'text/html' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `${variables.title.toLowerCase().replace(/\s+/g, '-')}.html`
+    a.download = `${title.trim().toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '-') || template.slug}.html`
     a.click()
+    setTimeout(() => URL.revokeObjectURL(url), 1000)
   }
 
   if (!template) return <div className="flex items-center justify-center min-h-screen">Cargando...</div>
@@ -105,14 +92,14 @@ ${previewHtml}
   return (
     <>
       <Head>
-        <title>Editor — {template.name}</title>
+        <title>Editor - {template.name}</title>
       </Head>
 
       <div className="min-h-screen bg-gray-100 flex flex-col">
         {/* Top Bar */}
-        <div className="bg-white shadow px-6 py-3 flex justify-between items-center">
+        <div className="bg-white shadow px-6 py-3 flex flex-wrap gap-2 justify-between items-center">
           <h1 className="font-bold text-lg text-gray-800">{template.name}</h1>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-3">
             <button 
               onClick={exportHTML}
               className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 font-semibold"
@@ -126,13 +113,13 @@ ${previewHtml}
             >
               {saving ? 'Guardando...' : 'Guardar Proyecto'}
             </button>
-            <a href="/" className="px-4 py-2 text-gray-500 hover:text-gray-700">← Volver</a>
+            <a href="/" className="px-4 py-2 text-gray-500 hover:text-gray-700"> Volver</a>
           </div>
         </div>
 
-        <div className="flex-1 flex overflow-hidden">
+        <div className="flex flex-1 flex-col md:flex-row">
           {/* Sidebar */}
-          <div className="w-80 bg-white shadow-lg overflow-y-auto p-6">
+          <div className="w-full md:w-80 md:shrink-0 bg-white shadow-lg overflow-y-auto p-6">
             <h2 className="font-bold text-gray-700 mb-4 uppercase text-xs tracking-wide">Colores</h2>
             <div className="space-y-3 mb-8">
               {Object.keys(colors).map(key => (
@@ -173,10 +160,10 @@ ${previewHtml}
           <div className="flex-1 p-6 overflow-y-auto">
             <div className="bg-white rounded-xl shadow overflow-hidden">
               <iframe
-                srcDoc={previewHtml}
+                srcDoc={pageHtml(variables.title || template.name, previewHtml)}
                 title="Preview"
                 className="w-full h-[800px] border-0"
-                sandbox="allow-scripts"
+                sandbox="allow-popups"
               />
             </div>
           </div>
