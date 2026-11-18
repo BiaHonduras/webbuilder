@@ -1,21 +1,17 @@
 import { useRef, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import { categories, templates } from '../data/templates'
+import { categories, catalog } from '../data/catalog'
 import TemplateCard from '../components/TemplateCard'
-import { pageHtml, renderTemplate, quoteUrl } from '../lib/template-preview'
+import { checkoutUrl, quoteUrl } from '../lib/checkout-links'
 
 const categoryNames = Object.fromEntries(categories.map(({ id, name }) => [id, name]))
 const normalize = value => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-const downloads = [
-  ['Editorial', 'https://html5up.net/editorial'],
-  ['Phantom', 'https://html5up.net/phantom'],
-  ['Massively', 'https://html5up.net/massively'],
-  ['Solid State', 'https://html5up.net/solid-state'],
-  ['Agency', 'https://startbootstrap.com/theme/agency'],
-  ['Creative', 'https://startbootstrap.com/theme/creative'],
-  ['Freelancer', 'https://startbootstrap.com/theme/freelancer'],
-  ['Shop Homepage', 'https://startbootstrap.com/template/shop-homepage'],
+const templates = [
+  ...catalog,
+  { id: 'noir-elegante', name: 'Noir', category: 'servicios', description: 'Diseño oscuro y minimalista.', colors: { bg: '#171624', primary: '#171624', secondary: '#756480' }, variables: { heading: 'Elegancia sin tiempo' } },
+  { id: 'bloom-warm', name: 'Bloom', category: 'servicios', description: 'Estilo cálido para marcas de bienestar.', colors: { bg: '#f6e4d9', primary: '#643c46', secondary: '#d7a18b' }, variables: { heading: 'Crece a tu ritmo' } },
+  { id: 'prism-creativo', name: 'Prism', category: 'portfolio', description: 'Portafolio de estilo dinámico y creativo.', colors: { bg: '#272443', primary: '#272443', secondary: '#ab62b6' }, variables: { heading: 'Diseño con personalidad' } },
 ]
 
 export default function Home() {
@@ -28,11 +24,6 @@ export default function Home() {
     normalize([template.name, categoryNames[template.category], template.description].join(' ')).includes(normalize(query.trim()))
   )
 
-  function handleUseTemplate(template) {
-    sessionStorage.setItem('selectedTemplate', JSON.stringify(template))
-    window.location.assign('/editor')
-  }
-
   function handlePreview(template) {
     setSelected(template)
     dialog.current.showModal()
@@ -42,14 +33,14 @@ export default function Home() {
     <>
       <Head>
         <title>WebNexo | Plantillas web para tu negocio</title>
-        <meta name="description" content="Explora plantillas web para emprendimientos en Honduras, prueba una demo y cotiza por WhatsApp." />
+        <meta name="description" content="Explora plantillas web para emprendimientos en Honduras, consulta una vista previa y cotiza por WhatsApp." />
       </Head>
       <main className="min-h-screen bg-[#f9f8fd] text-slate-950">
         <header className="border-b border-violet-100 bg-white">
           <nav className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-4 sm:px-8">
             <Link href="/" className="text-xl font-black tracking-tight text-violet-800">WebNexo</Link>
             <div className="flex items-center gap-4 text-sm font-semibold">
-              <Link href="/dashboard" className="text-slate-700 hover:text-violet-800">Mis proyectos</Link>
+              <Link href="/comprar/" className="text-slate-700 hover:text-violet-800">Mi cuenta</Link>
               <a href={quoteUrl()} target="_blank" rel="noopener noreferrer" className="rounded-lg bg-violet-700 px-4 py-2 text-white hover:bg-violet-800">Cotizar</a>
             </div>
           </nav>
@@ -80,13 +71,6 @@ export default function Home() {
               {filtered.map(template => <TemplateCard key={template.id} template={template} category={categoryNames[template.category]} onPreview={handlePreview} />)}
             </div> : <p className="rounded-xl border border-violet-100 bg-white p-6">No encontramos plantillas para esa búsqueda. Prueba otra palabra o elige otra categoría.</p>}
           </section>
-          <details className="rounded-2xl border border-violet-100 bg-white p-5">
-            <summary className="cursor-pointer font-semibold">Plantillas gratuitas para descargar</summary>
-            <p className="mt-3 text-sm text-slate-700">Enlaces a los autores originales. HTML5 UP requiere atribución y Start Bootstrap publica estas plantillas bajo MIT.</p>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {downloads.map(([name, url]) => <li key={name}><a className="inline-block rounded-lg border px-3 py-2 text-sm text-violet-800 hover:underline" href={url} target="_blank" rel="noopener noreferrer">{name}</a></li>)}
-            </ul>
-          </details>
         </div>
       </main>
 
@@ -96,11 +80,10 @@ export default function Home() {
             <strong>{selected.name}</strong>
             <button type="button" autoFocus onClick={() => dialog.current.close()} className="rounded-lg border px-4 py-2 text-sm">Cerrar</button>
           </div>
-          <iframe title={'Demo de ' + selected.name} sandbox="allow-popups allow-popups-to-escape-sandbox" srcDoc={pageHtml(selected.name, renderTemplate(selected))} className="h-[60vh] w-full border-0" />
+          <div className="flex min-h-[16rem] items-end overflow-hidden bg-slate-900 p-6 text-white sm:min-h-[24rem]" style={{ background: selected.image ? `linear-gradient(transparent, #161428dd), url("${selected.image}") center / cover` : `linear-gradient(135deg, ${selected.colors.primary}, ${selected.colors.secondary})` }}><p className="max-w-xl text-3xl font-bold sm:text-5xl">{selected.variables.heading}</p></div>
           <div className="flex flex-wrap items-center gap-3 border-t p-4">
             <a href={quoteUrl(selected)} target="_blank" rel="noopener noreferrer" className="rounded-lg bg-violet-700 px-4 py-2 font-semibold text-white">Cotizar</a>
-            <button type="button" onClick={() => handleUseTemplate(selected)} className="rounded-lg border px-4 py-2 font-semibold">Personalizar</button>
-            {selected.source && <a href={selected.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-sm underline">Referencia de diseño · {selected.source}</a>}
+            <Link href={checkoutUrl(selected.id)} className="rounded-lg border px-4 py-2 font-semibold">Comprar plantilla</Link>
           </div>
         </>}
       </dialog>
